@@ -18,6 +18,10 @@ export const crearNuevoTurno = async (req: Request, res: Response) => {
         const turnoCreado = await crearTurno(datos);
         res.status(201).json(turnoCreado);
     } catch (error) {
+        if (error instanceof Error && error.name === "ValidationError") {
+            res.status(400).json({ mensaje: "Datos inválidos" });
+            return;
+        }
         console.error("Error al crear turno", error);
         res.status(500).json({ mensaje: "Error al crear turno" });
     }
