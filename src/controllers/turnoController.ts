@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { obtenerTurnos, crearTurno, obtenerTurnoPorId, actualizarTurno, eliminarTurno } from "../services/turnoService.js";
-
+import { ErrorNegocio } from "../errors/ErrorNegocio.js";
 
 export const listarTurnos = async (req: Request, res: Response) => {
     try {
@@ -20,6 +20,10 @@ export const crearNuevoTurno = async (req: Request, res: Response) => {
     } catch (error) {
         if (error instanceof Error && error.name === "ValidationError") {
             res.status(400).json({ mensaje: "Datos inválidos" });
+            return;
+        }
+        if (error instanceof ErrorNegocio) {
+            res.status(400).json({ mensaje: error.message });
             return;
         }
         console.error("Error al crear turno", error);
