@@ -2,10 +2,12 @@ import express, { type Request, type Response } from "express";
 import { conectarDB } from "./config/db.js";
 import { config } from "./config/env.js";
 import router from "./routes/turnoRoutes.js";
+import authRouter from "./routes/authRoutes.js";
 
 const app = express();
 app.use(express.json());
 app.use("/turnos", router);
+app.use("/auth", authRouter);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("API de turnos médicos funcionando")
