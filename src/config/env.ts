@@ -11,4 +11,5 @@ const obligatoria = (nombre: string): string => {
 export const config = {
     port: Number(process.env.PORT) || 3000,
     mongodbUri: obligatoria("MONGO_URI"),
+    jwtSecret: obligatoria("JWT_SECRET"), 
 };
