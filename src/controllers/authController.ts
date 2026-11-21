@@ -21,7 +21,7 @@ export const registrarUsuario = async (req: Request, res: Response) => {
     }
 };
 
-export const loginDeUsuario = async (req: Request, res: Response) => {
+export const resultadoLogin = async (req: Request, res: Response) => {
     try {
         const usuario = await loginUsuario(req.body.email, req.body.password);
         res.status(200).json(usuario);
